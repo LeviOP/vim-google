@@ -1,9 +1,12 @@
 // ==UserScript==
-// @name       vim-google
-// @namespace  https://github.com/LeviOP
-// @version    0.0.1
-// @author     LeviOP
-// @match      *://www.google.com/search*
+// @name         vim-google
+// @namespace    https://github.com/LeviOP
+// @version      0.0.1
+// @author       LeviOP
+// @license      GPL-3.0-only
+// @downloadURL  https://raw.githubusercontent.com/LeviOP/vim-google/main/dist/vim-google.user.js
+// @updateURL    https://raw.githubusercontent.com/LeviOP/vim-google/main/dist/vim-google.user.js
+// @match        *://www.google.com/search*
 // ==/UserScript==
 
 (function () {

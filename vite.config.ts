@@ -8,7 +8,9 @@ export default defineConfig({
             entry: "src/main.ts",
             userscript: {
                 namespace: "https://github.com/LeviOP",
-                match: ["*://www.google.com/search*"]
+                match: ["*://www.google.com/search*"],
+                downloadURL: "https://raw.githubusercontent.com/LeviOP/vim-google/main/dist/vim-google.user.js",
+                updateURL: "https://raw.githubusercontent.com/LeviOP/vim-google/main/dist/vim-google.user.js"
             }
         })
     ]
