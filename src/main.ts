@@ -22,16 +22,21 @@ function handleSection(section: HTMLDivElement): HTMLElement[][] {
     const largeWebsiteTest = section.querySelector<HTMLDivElement>("div:has(div):has(table)");
     if (largeWebsiteTest !== null) return handleLargeWebsite(largeWebsiteTest);
 
+    const websiteQuoteTest = section.querySelector<HTMLDivElement>("div > block-component");
+    if (websiteQuoteTest !== null) return handleWebsiteQuote(websiteQuoteTest);
+
     const peopleAlsoAskTest = section.querySelector<HTMLDivElement>("div[data-initq]");
     if (peopleAlsoAskTest !== null) return handlePeopleAlsoAsk(peopleAlsoAskTest);
 
+    console.log("Don't know what this is!", section);
     return [];
 }
 
 function handleWebsite(div: HTMLDivElement): HTMLElement[][] {
+    console.log("handleWebsite");
     const levels = Array.from(div.querySelectorAll<HTMLDivElement>("div[data-snhf], div[data-sncf]"));
     return levels.reduce<HTMLElement[][]>((a, level) => {
-        const anchorGroups = level.querySelectorAll<HTMLElement>(":has(> a):not(:has(> a > div > img))");
+        const anchorGroups = level.querySelectorAll<HTMLElement>("span:has(> a), div:has(> a + *)");
         anchorGroups.forEach((group) => {
             a.push(Array.from(group.querySelectorAll("a")));
         });
@@ -40,7 +45,15 @@ function handleWebsite(div: HTMLDivElement): HTMLElement[][] {
 }
 
 function handleLargeWebsite(div: HTMLDivElement): HTMLElement[][] {
+    console.log("handleLargeWebsite");
     return Array.from(div.querySelectorAll("a")).map((a) => ([a]));
+}
+
+function handleWebsiteQuote(div: HTMLDivElement): HTMLElement[][] {
+    console.log("handleWebsiteQuote");
+    const anchor = div.querySelector<HTMLAnchorElement>("a:has(h3)");
+    if (anchor === null) return [];
+    return [[anchor]];
 }
 
 function handlePeopleAlsoAsk(div: HTMLDivElement): HTMLElement[][] {

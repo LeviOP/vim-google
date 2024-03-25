@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         vim-google
 // @namespace    https://github.com/LeviOP
-// @version      0.0.1
+// @version      0.1.0
 // @author       LeviOP
 // @license      GPL-3.0-only
 // @downloadURL  https://raw.githubusercontent.com/LeviOP/vim-google/main/dist/vim-google.user.js
@@ -33,15 +33,20 @@
     const largeWebsiteTest = section.querySelector("div:has(div):has(table)");
     if (largeWebsiteTest !== null)
       return handleLargeWebsite(largeWebsiteTest);
+    const websiteQuoteTest = section.querySelector("div > block-component");
+    if (websiteQuoteTest !== null)
+      return handleWebsiteQuote(websiteQuoteTest);
     const peopleAlsoAskTest = section.querySelector("div[data-initq]");
     if (peopleAlsoAskTest !== null)
       return handlePeopleAlsoAsk(peopleAlsoAskTest);
+    console.log("Don't know what this is!", section);
     return [];
   }
   function handleWebsite(div) {
+    console.log("handleWebsite");
     const levels = Array.from(div.querySelectorAll("div[data-snhf], div[data-sncf]"));
     return levels.reduce((a, level) => {
-      const anchorGroups = level.querySelectorAll(":has(> a):not(:has(> a > div > img))");
+      const anchorGroups = level.querySelectorAll("span:has(> a), div:has(> a + *)");
       anchorGroups.forEach((group) => {
         a.push(Array.from(group.querySelectorAll("a")));
       });
@@ -49,7 +54,15 @@
     }, []);
   }
   function handleLargeWebsite(div) {
+    console.log("handleLargeWebsite");
     return Array.from(div.querySelectorAll("a")).map((a) => [a]);
+  }
+  function handleWebsiteQuote(div) {
+    console.log("handleWebsiteQuote");
+    const anchor = div.querySelector("a:has(h3)");
+    if (anchor === null)
+      return [];
+    return [[anchor]];
   }
   function handlePeopleAlsoAsk(div) {
     console.log("question:", div);
