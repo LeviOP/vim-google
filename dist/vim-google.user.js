@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         vim-google
 // @namespace    https://github.com/LeviOP
-// @version      0.1.0
+// @version      0.1.1
 // @author       LeviOP
 // @license      GPL-3.0-only
 // @downloadURL  https://raw.githubusercontent.com/LeviOP/vim-google/main/dist/vim-google.user.js
