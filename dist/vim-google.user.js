@@ -112,7 +112,9 @@
     if (selectedElement !== void 0)
       selectedElement.style.background = "";
     selectedElement = element;
-    element.focus();
+    element.focus({
+      preventScroll: true
+    });
     element.style.background = "#0ef5";
     element.scrollIntoView({
       block: "center",

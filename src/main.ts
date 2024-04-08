@@ -105,7 +105,9 @@ function focusElement(sections: HTMLElement[][][]) {
     if (element === undefined) return;
     if (selectedElement !== undefined) selectedElement.style.background = "";
     selectedElement = element;
-    element.focus();
+    element.focus({
+        preventScroll: true
+    });
     element.style.background = "#0ef5";
     element.scrollIntoView({
         block: "center",
